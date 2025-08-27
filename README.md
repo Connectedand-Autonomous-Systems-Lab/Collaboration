@@ -7,5 +7,7 @@ We are using 2021.3.9f1 because of the following reasons.
 ## Starting Beam Eye tracker
 
 Run the Beam Eye tracker and enable the gaming extensions and eye tracking overlay. 
+
 Activate an environment which contains beam pkg installed in it.
+
 Run Original_Beam_Python_Server\Beam.py
