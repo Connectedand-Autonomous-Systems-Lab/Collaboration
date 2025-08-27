@@ -1,0 +1,5 @@
+SelectedEnvironment: "City"
+LightingIntensity: 1.5
+NumberOfHumans: 5
+CameraPosition: [0, 10, -10]
+CameraRotation: [30, 0, 0]
