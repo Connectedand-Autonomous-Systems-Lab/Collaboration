@@ -119,8 +119,14 @@ public class MazeGenerator : MonoBehaviour
                     GameObject light = Instantiate(pointLight, new Vector3(x*cubeSize.x,1,y*cubeSize.z), Quaternion.identity, gameObject.transform);
                     if(lightingLevel == 1){
                         light.GetComponent<Light>().range = 1.0f;
-                    }else{
-                        light.GetComponent<Light>().range = 10.0f;
+                    }else if (lightingLevel == 2){
+                        light.GetComponent<Light>().range = 2.0f;
+                    }
+                    else if (lightingLevel == 3){
+                        light.GetComponent<Light>().range = 3.0f;
+                    }
+                    else if (lightingLevel == 4){
+                        light.GetComponent<Light>().range = 4.0f;
                     }
                     
                 }

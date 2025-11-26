@@ -49,7 +49,7 @@ public class BBoxReceiver : MonoBehaviour
         foreach (var bbox in args.data)
         {
             // Each bbox has the following fields : label_id, label_name, instance_id, x, y, width, height
-            Debug.Log($"[BBoxReceiver] BBox {count}: Label={bbox.instance_id}, x={bbox.x}, y={bbox.y}, w={bbox.width}, h={bbox.height}");
+            // Debug.Log($"[BBoxReceiver] BBox {count}: Label={bbox.instance_id}, x={bbox.x}, y={bbox.y}, w={bbox.width}, h={bbox.height}");
             count++;
             StringMsg InstanceId = new StringMsg();
             InstanceId.data = bbox.instance_id.ToString();

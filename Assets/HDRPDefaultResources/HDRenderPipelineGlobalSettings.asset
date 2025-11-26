@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cc897cf8675041a751163b51f97dd, type: 3}
   m_Name: HDRenderPipelineGlobalSettings
   m_EditorClassIdentifier: 
-  m_Version: 3
   m_DefaultVolumeProfile: {fileID: 11400000, guid: 83746bb8ba66c40bf8a172d55f9b427b, type: 2}
   m_LookDevVolumeProfile: {fileID: 11400000, guid: 58b5f37734197184b80db1a02afc5e12, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
@@ -100,3 +99,4 @@ MonoBehaviour:
     serializedProfiles: []
     serializedBakeSettings: []
     serializedBakingSets: []
+  m_Version: 3

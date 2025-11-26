@@ -11,16 +11,17 @@ using UnityEngine.UI;
 public class EyeGazeTracker : MonoBehaviour
 {
     private Canvas canvas;
+    public Camera gazeCamera;
     public RawImage gazeCursor;  // Assign in Unity Inspector
+    
     private RawImage _gazeCursor;
     private ClientWebSocket ws;
     private CancellationTokenSource cancelToken;
-    private float screenWidth;
-    private float screenHeight;
 
     private ConcurrentQueue<string> messageQueue = new ConcurrentQueue<string>(); // ✅ Queue for thread-safe message handling
 
     public static Vector2 gazePosition;
+    [SerializeField] private LayerMask worldLayers = ~0;
 
     [Serializable]
     private class GazeData
@@ -32,8 +33,6 @@ public class EyeGazeTracker : MonoBehaviour
 
     async void Start()
     {
-        screenWidth = Screen.width;
-        screenHeight = Screen.height;
         ws = new ClientWebSocket();
         cancelToken = new CancellationTokenSource();
 
@@ -41,7 +40,6 @@ public class EyeGazeTracker : MonoBehaviour
         if(canvas != null){
             _gazeCursor = Instantiate(gazeCursor, Vector3.zero, Quaternion.identity, canvas.transform);
         }
-
         await ConnectWebSocket();
     }
 
@@ -94,17 +92,30 @@ public class EyeGazeTracker : MonoBehaviour
         try
         {
             GazeData gazeData = JsonUtility.FromJson<GazeData>(jsonData);
-
+            // The current desktop/native display mode
+            var cur = Screen.currentResolution;           // width, height, refreshRateRatio
+            int mw = cur.width;
+            int mh = cur.height;
+            
             if (gazeData != null && gazeCursor != null)
             {
-                float screenX = gazeData.x ;
-                float screenY = (-gazeData.y) ;  // Flip Y for Unity UI
 
-                // Debug.Log("Gaze Position: x=" + screenX + ", y=" + screenY);
+                float screenX = (int)gazeData.x;
+                float screenY = (int)gazeData.y;
 
-                
-                _gazeCursor.rectTransform.anchoredPosition = new Vector2(screenX, screenY);
-                gazePosition = new Vector2(screenX, 1080 + screenY);
+                screenX = screenX / 1920 * mw;
+                screenY = screenY / 1080 * mh;
+                _gazeCursor.rectTransform.anchoredPosition = new Vector2(screenX, -screenY);
+
+                screenX = (int)gazeData.x;
+                screenY = 1080 - (int)gazeData.y; // because in Eyetracker 0,0 is top left. In Unity UI, 0,0 is bottom left
+
+                Ray ray = gazeCamera.ScreenPointToRay(new Vector3(screenX, screenY, 0f));
+                if (Physics.Raycast(ray, out RaycastHit hit, 1000, worldLayers, QueryTriggerInteraction.Ignore))
+                {
+                    Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+                    Debug.Log($"World hit:  object:{hit.collider.gameObject.name} current res:{mw},{mh} screen point:{screenX},{screenY} hit 3d point: {hit.point}");
+                }
             }
         }
         catch (Exception ex)

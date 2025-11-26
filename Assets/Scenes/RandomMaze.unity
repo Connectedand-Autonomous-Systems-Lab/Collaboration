@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b988d79f03d8046b64e58718495774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeSize: 7
-  numPeople: 10
+  mazeSize: 22
+  numPeople: 18
   numObjects: 10
   lightingLevel: 1
   autoIdentifyHumans: 1
@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1458045336}
   - component: {fileID: 1458045335}
+  - component: {fileID: 1458045337}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -334,6 +335,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1458045337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458045334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1485569794
 GameObject:
   m_ObjectHideFlags: 3
@@ -363,15 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ee903ff896bde4bb82aed4aec2bf61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endpoint:
-    id: 0
-  references:
-    version: 1
-    00000000:
-      type: {class: PerceptionEndpoint, ns: UnityEngine.Perception.GroundTruth.Consumers, asm: Unity.Perception.Runtime}
-      data:
-        capturesPerFile: 150
-        metricsPerFile: 150
 --- !u!4 &1485569796
 Transform:
   m_ObjectHideFlags: 3
@@ -517,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeSize: {x: 7, y: 0.1, z: 7}
-  mazeWidth: 19
+  mazeWidth: 25
   mazeHeight: 5
   wallPrefab: {fileID: 1175611110751490275, guid: cb8205fc1f92d654fa5103223859a01b, type: 3}
   floorPrefab: {fileID: 1045704098250702737, guid: 0b06048c8b7d8f547b5594e1b4ba32b0, type: 3}
@@ -525,7 +537,7 @@ MonoBehaviour:
   pointCount: 4
   randomPoints: []
   victimModel: {fileID: 7025514175951992108, guid: 7101054a26966cc4888b5b576ea9613a, type: 3}
-  numObjects: 10
+  numObjects: 5
   lightingLevel: 1
   tb3: {fileID: 1872241788542568028, guid: e057d09c705fb364080c24f36210dec8, type: 3}
   avatar: {fileID: 2647061816915469841, guid: ac2c4689b6e99ea4d8677b28444d98fe, type: 3}

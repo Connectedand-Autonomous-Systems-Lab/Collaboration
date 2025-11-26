@@ -131,8 +131,26 @@ public class PVGazePublisher : MonoBehaviour
         RenderTexture.active = null;
         Destroy(rt);
 
+        // *** COMPRESS / DOWNSCALE ***
+        float scale = 0.125f; // set your desired scale here
+        int newWidth = Mathf.RoundToInt(camTexture.width * scale);
+        int newHeight = Mathf.RoundToInt(camTexture.height * scale);
+        Texture2D scaledTex = new Texture2D(newWidth, newHeight, TextureFormat.RGB24, false);
+        for (int y = 0; y < newHeight; y++)
+        {
+            for (int x = 0; x < newWidth; x++)
+            {
+                Color c = camTexture.GetPixelBilinear(
+                    (float)x / newWidth,
+                    (float)y / newHeight
+                );
+                scaledTex.SetPixel(x, y, c);
+            }
+        }
+        scaledTex.Apply();
+    
         // Convert to byte[] (RGB24)
-        byte[] imageBytes = camTexture.GetRawTextureData();
+        byte[] imageBytes = scaledTex.GetRawTextureData();
 
         var timestamp = new TimeStamp(Clock.time);
 
@@ -148,11 +166,11 @@ public class PVGazePublisher : MonoBehaviour
                 },
                 frame_id = cameraFrameID
             },
-            height = (uint)camTexture.height,
-            width = (uint)camTexture.width,
+            height = (uint)newHeight,
+            width = (uint)newWidth,
             encoding = "rgb8",
             is_bigendian = 0,
-            step = (uint)(camTexture.width * 3),
+            step = (uint)(newWidth * 3),
             data = imageBytes
         };
 
