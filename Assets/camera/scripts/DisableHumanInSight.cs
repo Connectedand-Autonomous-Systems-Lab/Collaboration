@@ -1,13 +1,34 @@
 using System.Linq;
+using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
-// using UnityEngine.Perception;
 using UnityEngine.Perception.GroundTruth;
+using RosMessageTypes.Geometry;
+using RosMessageTypes.Std;
+using RosMessageTypes.Sensor;
+using RosMessageTypes.BuiltinInterfaces;
+using Unity.Robotics.ROSTCPConnector;
+using Unity.Robotics.ROSTCPConnector.ROSGeometry;
+using System;
+using System.Text;
+using Unity.Robotics.Core;
+using UnityEngine.Serialization;
 
 public class DisableHumanInSight : MonoBehaviour
 {
     public Camera cam;                // Assign your camera in Inspector
     public LayerMask obstacleMask; // Layers that can block view (e.g. Walls, Default)
+    public string IdentifiedTopicName = "/detection";
+    public string IdentifiedLocationTopicName = "/detection_location";
+    private ROSConnection ros;
+
+    void Start()
+    {
+        // Initialize ROS Connection
+        ros = ROSConnection.GetOrCreateInstance();
+        ros.RegisterPublisher<PointStampedMsg>(IdentifiedLocationTopicName);
+        ros.RegisterPublisher<StringMsg>(IdentifiedTopicName);
+    }
 
     void Update()
     {
@@ -28,7 +49,47 @@ public class DisableHumanInSight : MonoBehaviour
                 if (IsReallyVisible(h.transform, cam))
                 {
                     h.SetActive(false);
-                    // Debug.Log($"Disabled human: {h.name}");
+                    Debug.Log($"Disabled human: {h.name}");
+
+                    StringMsg objectname = new StringMsg();
+                    objectname.data = h.name;
+                    if (ros != null)
+                    {
+                        ros.Publish(IdentifiedTopicName, objectname);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("ROSConnection is not initialized, cannot publish IdentifiedTopicName");
+                    }
+                    
+                    // Create a new PointStamped message
+                    var timestamp = new TimeStamp(Clock.time);
+                    PointStampedMsg stampedLocation = new PointStampedMsg
+                    {
+                        header = new HeaderMsg
+                        {
+                            stamp = new TimeMsg
+                            {
+                                sec = timestamp.Seconds,
+                                nanosec = timestamp.NanoSeconds,
+                            },
+                            frame_id = "odom"
+                        },
+                        point = new PointMsg
+                        {
+                            x = h.transform.position.x,
+                            y = h.transform.position.y,
+                            z = h.transform.position.z
+                        }
+                    };
+                    if (ros != null)
+                    {
+                        ros.Publish(IdentifiedLocationTopicName, stampedLocation);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("ROSConnection is not initialized, cannot publish IdentifiedLocationTopicName");
+                    }
                 }
                 else
                 {

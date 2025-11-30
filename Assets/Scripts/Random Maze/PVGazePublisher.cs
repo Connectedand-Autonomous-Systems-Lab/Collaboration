@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using Unity.Robotics.Core;
 using UnityEngine.Serialization;
 using System.IO;
+using System.Threading.Tasks;
+using UnityEditor;
 
 public class PVGazePublisher : MonoBehaviour
 {
@@ -20,18 +22,35 @@ public class PVGazePublisher : MonoBehaviour
     [Header("ROS Settings")]
     public string gazeTopicName = "/gaze/point";
     // public string hitObjectTopicName = "/gaze/hit_object";
-    public bool PVPublisher = false;
-    public bool PVSaver = false;
-    public string pvTopicName = "/pv";
     public float gazePublishRate = 60.0f; // Publish rate in Hz
+
+    public bool PVPublisher = false;
+    public string pvTopicName = "/pv";
     public float pvPublishRate = 5.0f; // Publish rate in Hz
     public string cameraFrameID = "human/camera";
+
+    [Header("PV Saver Settings")]
+    public bool PVSaver = false;
+    public string saveFolderPath = "SavedImages";
+    // public string saveFolderPath = EditorUtility.OpenFolderPanel("Select Directory", "", "");
 
     private ROSConnection ros;
     private float gazeTimer;
     private float pvTimer;
     Texture2D camTexture;
     private Texture2D imageTexture;
+    // --- SavePV optimisation fields ---
+    [Header("Save/PV settings")]
+    [Tooltip("Downscale factor for saving images. Higher = smaller image and faster processing.")]
+    public int saveDownscale = 4;
+
+    [Tooltip("JPEG encoding quality used for SavePV (1-100). Lower = faster + smaller files.")]
+    [Range(1, 100)]
+    public int saveJpegQuality = 60;
+
+    // Reusable RT & texture for saving - avoids creating/destroying objects every frame
+    private RenderTexture saveRT = null;
+    private Texture2D saveTex = null;
 
     void Start()
     {
@@ -47,6 +66,18 @@ public class PVGazePublisher : MonoBehaviour
             if (cam == null)
             {
                 Debug.LogError("No camera found. Please assign a camera to the script.");
+            }
+            // ensure save folder exists if we may save
+            if (PVSaver && !string.IsNullOrEmpty(saveFolderPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(saveFolderPath);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"Couldn't create save folder {saveFolderPath}: {ex.Message}");
+                }
             }
             // load sample image
             // Texture2D loadedTexture = Resources.Load<Texture2D>("sample");
@@ -271,38 +302,77 @@ public class PVGazePublisher : MonoBehaviour
 
     void SavePV()
     {
-        int width = cam.pixelWidth;
-        int height = cam.pixelHeight;
+        if (cam == null)
+        {
+            Debug.LogWarning("SavePV: camera is null, skipping save.");
+            return;
+        }
 
-        // Create a RenderTexture and copy camera image to it
-        RenderTexture rt = new RenderTexture(width, height, 24);
-        cam.targetTexture = rt;
+        // desired smaller size (downscale factor)
+        int width = Mathf.Max(1, cam.pixelWidth / Mathf.Max(1, saveDownscale));
+        int height = Mathf.Max(1, cam.pixelHeight / Mathf.Max(1, saveDownscale));
+
+        // Reuse or create RT/Texture for saving to avoid allocations every call
+        if (saveRT == null || saveRT.width != width || saveRT.height != height)
+        {
+            if (saveRT != null)
+            {
+                saveRT.Release();
+                Destroy(saveRT);
+                saveRT = null;
+            }
+            if (saveTex != null)
+            {
+                Destroy(saveTex);
+                saveTex = null;
+            }
+
+            saveRT = new RenderTexture(width, height, 24);
+            saveTex = new Texture2D(width, height, TextureFormat.RGB24, false);
+        }
+
+        // Render to smaller RT directly (faster + less memory)
+        cam.targetTexture = saveRT;
         cam.Render();
-        RenderTexture.active = rt;
+        RenderTexture.active = saveRT;
 
-        // Read pixels into texture
-        camTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-        camTexture.Apply();
-        // FlipTextureVertically(camTexture); // Fix upside-down image
+        // Read pixels quickly into the small texture
+        saveTex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        saveTex.Apply(false, false);
 
-        // Cleanup
+        // Cleanup render targets
         cam.targetTexture = null;
         RenderTexture.active = null;
-        Destroy(rt);
 
-        // Encode to PNG (or JPG if you prefer)
-        byte[] pngBytes = camTexture.EncodeToPNG(); // or EncodeToJPG()
+        // Encode to JPG (faster and smaller than PNG) and write to disk on a background thread
+        byte[] jpgBytes = saveTex.EncodeToJPG(saveJpegQuality);
 
-        // Timestamp for filename
         var timestamp = new TimeStamp(Clock.time);
-        string filename = $"{timestamp.Seconds}_{timestamp.NanoSeconds}.png";
+        string filename = $"{timestamp.Seconds}_{timestamp.NanoSeconds}.jpg";
+        string savePath = Path.Combine(saveFolderPath, filename);
 
-        // Save path (change as needed)
-        string savePath = Path.Combine(@"C:\Users\mayoo\Documents\unity_projects\Unity_saved_pv_human_behaviour\maze1", filename);
-        // string savePath = Path.Combine(Application.dataPath, "saved_images", filename);
-        File.WriteAllBytes(savePath, pngBytes);
+        // Ensure folder exists
+        try
+        {
+            Directory.CreateDirectory(saveFolderPath);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"SavePV: couldn't create folder '{saveFolderPath}': {ex.Message}");
+        }
 
-        // Debug.Log($"Saved image to: {savePath}");
+        // Write file asynchronously to avoid blocking main thread
+        Task.Run(() =>
+        {
+            try
+            {
+                File.WriteAllBytes(savePath, jpgBytes);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"SavePV: failed to write '{savePath}': {ex.Message}");
+            }
+        });
     }
 
     void OnApplicationQuit()

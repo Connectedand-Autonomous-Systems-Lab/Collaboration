@@ -1,99 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2589892202129780586
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3396691518469146234}
-  - component: {fileID: 2530331115215660296}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3396691518469146234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589892202129780586}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.98, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2647061816754266285}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!108 &2530331115215660296
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589892202129780586}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.02
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
 --- !u!1 &2647061816585530858
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +18,7 @@ GameObject:
   - component: {fileID: 4941435258382288925}
   - component: {fileID: 8263198047525860926}
   - component: {fileID: 6064453356295438648}
+  - component: {fileID: 2132129127176781070}
   m_Layer: 0
   m_Name: human/camera
   m_TagString: MainCamera
@@ -265,7 +172,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647061816585530858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f664bd4f68af454e84e180bada6b89d, type: 3}
   m_Name: 
@@ -455,12 +362,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647061816585530858}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f79eb19aed970b46a2e43a43711bd8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IdentifiedTopicName: /human/detection
+--- !u!114 &2132129127176781070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647061816585530858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a48d7b6740be24b810ddfedb3d8689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2647061816585530868}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  IdentifiedTopicName: /human/detection
+  IdentifiedLocationTopicName: /human/detection_location
 --- !u!1 &2647061816754266284
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +419,6 @@ Transform:
   m_Children:
   - {fileID: 2647061816585530859}
   - {fileID: 2647061817786865854}
-  - {fileID: 3396691518469146234}
   m_Father: {fileID: 2647061816915469853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -619,7 +543,6 @@ Transform:
   m_Children:
   - {fileID: 2647061816754266285}
   - {fileID: 2739393300859614688}
-  - {fileID: 2082290030819561296}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -651,7 +574,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2045139648903867002, guid: 8b6637124ff56fd43bd8c0a20ba66731, type: 3}
+  - {fileID: 2100000, guid: cfa77937ec4e9430e903ce4997b5ff14, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -751,9 +674,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed91b7b0135c3d42b2adf569d336fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  rotationSpeed: 200
-  verticalRotationSpeed: 300
+  moveSpeed: 5
+  rotationSpeed: 100
+  verticalRotationSpeed: 150
   humanCamera: {fileID: 2647061816585530868}
   captureInterval: 1
   gravity: -9.81
@@ -780,7 +703,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647061816915469841}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bb066e92f38f6b45977e7e7279abeb1, type: 3}
   m_Name: 
@@ -792,19 +715,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647061816915469841}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43b0b3501654d9e4e811e10a3fdca154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 2647061816585530868}
-  gazeTopicName: /gaze/point
-  PVPublisher: 0
-  PVSaver: 1
-  pvTopicName: /pv
+  gazeTopicName: /human/gaze/point
   gazePublishRate: 60
-  pvPublishRate: 30
+  PVPublisher: 0
+  pvTopicName: /pv
+  pvPublishRate: 5
   cameraFrameID: human/camera
+  PVSaver: 1
+  saveFolderPath: D:\User Study\Mayooran\Easy2\Unity
+  saveDownscale: 4
+  saveJpegQuality: 60
 --- !u!1 &2647061817786865841
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,8 +782,8 @@ MonoBehaviour:
   PublishPeriodSeconds: 0.1
   RangeMetersMin: 0
   RangeMetersMax: 20
-  ScanAngleStartDegrees: -45
-  ScanAngleEndDegrees: 45
+  ScanAngleStartDegrees: 45
+  ScanAngleEndDegrees: -45
   ScanOffsetAfterPublish: 0
   NumMeasurementsPerScan: 360
   TimeBetweenMeasurementsSeconds: 0
@@ -944,58 +870,6 @@ MonoBehaviour:
   jointName: 
   EffortLimit: 1000
   VelocityLimit: 1000
---- !u!1 &3705379792681090872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2082290030819561296}
-  - component: {fileID: 2256730221680545638}
-  m_Layer: 0
-  m_Name: Publisher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2082290030819561296
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3705379792681090872}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2647061816915469853}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2256730221680545638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3705379792681090872}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43b0b3501654d9e4e811e10a3fdca154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 2647061816585530868}
-  gazeTopicName: /gaze/point
-  PVPublisher: 1
-  PVSaver: 0
-  pvTopicName: /pv
-  gazePublishRate: 60
-  pvPublishRate: 30
-  cameraFrameID: human/camera
 --- !u!1 &8694232478271739104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,7 +909,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8694232478271739104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e6f90a79216c7443874d78ac5c9adbf, type: 3}
   m_Name: 
