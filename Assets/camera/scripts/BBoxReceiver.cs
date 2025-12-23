@@ -15,6 +15,8 @@ public class BBoxReceiver : MonoBehaviour
     // private CameraSensorComponent sensorComponent;
     public string IdentifiedTopicName = "/detection";
     private ROSConnection ros;
+    // Store already-published detection instance IDs for fast lookup
+    private HashSet<string> detectionList = new HashSet<string>();
 
     void Start()
     {
@@ -51,10 +53,31 @@ public class BBoxReceiver : MonoBehaviour
             // Each bbox has the following fields : label_id, label_name, instance_id, x, y, width, height
             // Debug.Log($"[BBoxReceiver] BBox {count}: Label={bbox.instance_id}, x={bbox.x}, y={bbox.y}, w={bbox.width}, h={bbox.height}");
             count++;
-            StringMsg InstanceId = new StringMsg();
-            InstanceId.data = bbox.instance_id.ToString();
-            ros.Publish(IdentifiedTopicName, InstanceId);
+            string id = bbox.instance_id.ToString();
+            // Publish only the first time we see this instance id
+            if (!detectionList.Contains(id))
+            {
+                detectionList.Add(id);
+                StringMsg InstanceId = new StringMsg();
+                InstanceId.data = "female" + id;
+                ros.Publish(IdentifiedTopicName, InstanceId);
+                UnityEngine.Debug.Log($"Published BBox Instance ID: {InstanceId.data}");
+            }
         }
         
+    }
+
+    private void OnDestroy()
+    {
+        var perceptionCamera = GetComponent<PerceptionCamera>();
+        if (perceptionCamera != null)
+        {
+            var bboxLabeler = perceptionCamera.labelers
+                .OfType<BoundingBox2DLabeler>()
+                .FirstOrDefault();
+
+            if (bboxLabeler != null)
+                bboxLabeler.boundingBoxesCalculated -= OnBoundingBoxesCalculated;
+        }
     }
 }
