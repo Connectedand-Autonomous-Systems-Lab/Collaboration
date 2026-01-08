@@ -1,3 +1,7 @@
+# ConCord: Human-in-the-Loop, Cooperative Robot Exploration
+
+This repository contains the codebase to deploy the Unity side of this project. Use the Unity Hub to install this from the disk after cloning it. 
+
 ## Version Compatibilities
 
 We are using 2021.3.9f1 because of the following reasons.
