@@ -86,7 +86,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ml-agents": {
-      "version": "file:C:/Users/mayoo/Documents/NIPS/2021/ml-agents-release_20/ml-agents-release_20/com.unity.ml-agents",
+      "version": "file:/home/mayooran/Documents/Unity_Projects/ml-agents-release_20/ml-agents-release_20/com.unity.ml-agents",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -96,7 +96,7 @@
       }
     },
     "com.unity.ml-agents.extensions": {
-      "version": "file:C:/Users/mayoo/Documents/NIPS/2021/ml-agents-release_20/ml-agents-release_20/com.unity.ml-agents.extensions",
+      "version": "file:/home/mayooran/Documents/Unity_Projects/ml-agents-release_20/ml-agents-release_20/com.unity.ml-agents.extensions",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -112,7 +112,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.perception": {
-      "version": "file:C:/Users/mayoo/Documents/NIPS/2021/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception",
+      "version": "file:/home/mayooran/Documents/Unity_Projects/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -184,7 +184,7 @@
       "hash": "7f055108f43ab11ff297175a52af5d30fbac9d57"
     },
     "com.unity.scripting.python": {
-      "version": "4.0.0-exp.5",
+      "version": "7.0.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029774182, g: 0.017837562, b: 0.011047557, a: 1}
+  m_IndirectSpecularColor: {r: 0.03229831, g: 0.020639852, b: 0.015193522, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1274,6 +1274,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 0.7
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -1376,14 +1384,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 0
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!1001 &960653211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3472,11 +3472,23 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ee73a78628332284ab5c901f352ab627, type: 2}
     - target: {fileID: 529076148745899668, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.7
+      value: 6.2
       objectReference: {fileID: 0}
     - target: {fileID: 529076148745899668, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 105.6
+      value: 77.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 529076148745899668, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 529076148745899668, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 529076148745899668, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6792043567280113368, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
       propertyPath: m_RootOrder
