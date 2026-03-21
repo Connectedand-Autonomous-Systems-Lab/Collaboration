@@ -2,6 +2,10 @@
 
 This repository contains the codebase to deploy the Unity side of this project. Use the Unity Hub to install this from the disk after cloning it. 
 
+## Installation
+
+Add Perception pkg by the package manager from Unity. The required version of it is in Perception folder. 
+
 ## Version Compatibilities
 
 We are using 2021.3.9f1 because of the following reasons.
