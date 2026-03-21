@@ -82,7 +82,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.perception": {
-      "version": "file:/home/mayooran/Documents/Unity_Projects/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception",
+      "version": "file:../Perception/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception-Release-0.9.0.preview.2/com.unity.perception",
       "depth": 0,
       "source": "local",
       "dependencies": {
