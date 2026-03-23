@@ -2,15 +2,25 @@
 
 This repository contains the codebase to deploy the Unity side of this project. Use the Unity Hub to install this from the disk after cloning it. 
 
-## Installation
+## Quick Guide
 
-Add Perception pkg by the package manager from Unity. The required version of it is in Perception folder. 
+### Installation
 
-## Version Compatibilities
+1. Clone this repository to your local disk.
+2. Navigate to Unity Hub and use the option "Add project from disk" to select the cloned folder. 
+
+### Known errors
+
+1. **Perception package not found:** Add Perception pkg by the package manager from Unity. The required version of it is in Perception folder. 
+
+### Version Compatibilities
 
 We are using 2021.3.9f1 because of the following reasons.
 1. UNITY_ROS_RL_SIMULATOR which was on 2020.3.48f1 did not support Perception pkg.
 2. In future, we can use ML Agent in this project as it was used in PeopleSansPeople in the same Unity version.
+
+**With this being setup, you are ready to test out the results from ConCord!**
+
 
 ## Starting Beam Eye tracker
 
