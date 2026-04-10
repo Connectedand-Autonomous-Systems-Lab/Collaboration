@@ -9,6 +9,29 @@ This repository contains the codebase to deploy the Unity side of this project. 
 1. Clone this repository to your local disk.
 2. Navigate to Unity Hub and use the option "Add project from disk" to select the cloned folder. 
 
+### Run the Game
+
+1. Select the Hard Scene from your project explorer window.
+
+<img src="readme_files/Project_explorer.png" width="50%" />
+
+2. Make sure to Toggle "human" game object according to the type of run you select.
+
+
+| Mode | Human Player state |
+| --- | --- |
+| Visualise a complete demonstration saved in a ros bag | Disable |
+| Run a robot asynchronously with a saved human bag | Disable |
+| Run both human and robot real time| Enable |
+
+Refer the following image.
+
+<img src="readme_files/Scene.png" width="50%" />
+
+
+
+3. Click play!
+
 ### Known errors
 
 1. **Perception package not found:** Add Perception pkg by the package manager from Unity. The required version of it is in Perception folder. 
