@@ -341,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2647061816915469841, guid: ac2c4689b6e99ea4d8677b28444d98fe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2647061816915469853, guid: ac2c4689b6e99ea4d8677b28444d98fe, type: 3}
       propertyPath: m_RootOrder
@@ -3962,6 +3962,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7652868415801438102, guid: 7101054a26966cc4888b5b576ea9613a, type: 3}
   m_PrefabInstance: {fileID: 1682572182}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1897912107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 458573131784529276, guid: 2351097b8af127b4088c0df7481a8694, type: 3}
+  m_PrefabInstance: {fileID: 1355032794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1897912120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897912107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967f7747bd690dd41bfed4e6090ab213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClockMode: 0
+  m_LastSetClockMode: 0
+  m_PublishRateHz: 100
 --- !u!1001 &1900590430
 PrefabInstance:
   m_ObjectHideFlags: 0
