@@ -4,7 +4,7 @@ This repository contains the codebase to deploy the Unity side of this project. 
 
 ## Installation
 
-Use [Unity Hub official installation guide for Linux]{https://docs.unity.com/en-us/hub/install-hub-linux} to download the Unity Hub.
+Use [Unity Hub official installation guide for Linux](https://docs.unity.com/en-us/hub/install-hub-linux) to download the Unity Hub.
 
 ## Quick Guide
 
