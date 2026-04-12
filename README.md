@@ -2,12 +2,16 @@
 
 This repository contains the codebase to deploy the Unity side of this project. Use the Unity Hub to install this from the disk after cloning it. 
 
+## Installation
+
+Use [Unity Hub official installation guide for Linux]{https://docs.unity.com/en-us/hub/install-hub-linux} to download the Unity Hub.
+
 ## Quick Guide
 
 ### Installation
 
 1. Clone this repository to your local disk.
-2. Navigate to Unity Hub and use the option "Add project from disk" to select the cloned folder. 
+2. Navigate to Unity Hub and use the option "Add project from disk" to select the cloned folder. You will be prompted to download the 2021.3.9f1 Unity Editor. Ignore the security warning to download it.
 
 ### Run the Game
 
